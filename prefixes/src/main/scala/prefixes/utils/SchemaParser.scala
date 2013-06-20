@@ -1,4 +1,4 @@
-package edu.umd.mith.banana.utils
+package edu.umd.mith.banana.prefixes.utils
 
 import org.w3.banana._
 import org.w3.banana.diesel._

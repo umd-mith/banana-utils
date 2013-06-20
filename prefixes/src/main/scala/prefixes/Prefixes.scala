@@ -1,6 +1,6 @@
-package edu.umd.mith.banana
+package edu.umd.mith.banana.prefixes
 
-import edu.umd.mith.banana.utils._
+import edu.umd.mith.banana.prefixes.utils._
 import java.io.InputStream
 import org.w3.banana._
 import org.w3.banana.sesame._

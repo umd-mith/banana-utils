@@ -1,4 +1,4 @@
-package edu.umd.mith.banana.utils
+package edu.umd.mith.banana.prefixes.utils
 
 trait ReflectionUtils {
   def constructor(u: scala.reflect.api.Universe) = {

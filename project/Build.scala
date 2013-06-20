@@ -6,10 +6,35 @@ object BananaUtils extends Build {
     id = "banana-utils",
     base = file("."),
     settings = commonSettings
-  ).aggregate(prefixer)
+  ).aggregate(io, ioJena, prefixes)
 
-  lazy val prefixer: Project = Project(
-    id = "banana-utils-prefixes",
+  lazy val io: Project = Project(
+    id = "banana-io",
+    base = file("io"),
+    settings = commonSettings
+  ).dependsOn(
+    ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-rdf")
+  )
+
+  lazy val ioJena: Project = Project(
+    id = "banana-io-jena",
+    base = file("io-jena"),
+    dependencies = Seq(io),
+    settings = commonSettings ++ Seq(
+      libraryDependencies ++= Seq(
+        //"org.slf4j" % "slf4j-simple" % "1.6.4",
+        "com.github.jsonld-java" % "jsonld-java-jena" % "0.1" excludeAll(
+          ExclusionRule(organization = "org.apache.jena"),
+          ExclusionRule(organization = "org.slf4j")
+        )
+      )
+    )
+  ).dependsOn(
+    ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-jena")
+  )
+
+  lazy val prefixes: Project = Project(
+    id = "banana-prefixes",
     base = file("prefixes"),
     settings = commonSettings ++ Seq(
       libraryDependencies <+= scalaVersion(
@@ -17,7 +42,6 @@ object BananaUtils extends Build {
       )
     )
   ).dependsOn(
-    ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-rdf"),
     ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-sesame")
   )
 
