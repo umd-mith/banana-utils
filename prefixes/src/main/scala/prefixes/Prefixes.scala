@@ -23,6 +23,32 @@ trait Prefixes[Rdf <: RDF] {
     macro PrefixMacros.createFromSchema_impl[Rdf]
 }
 
+object Prefixes {
+  def context[P](p: P): Map[String, String] = macro context_impl[P]
+
+  def context_impl[P: c.WeakTypeTag](c: Context)(p: c.Expr[P]) = {
+    import c.universe._
+
+    val prefixType = typeOf[Prefix[_]]
+    val container = c.resetAllAttrs(p.tree)
+
+    val prefixes = weakTypeOf[P].members.collect {
+      case m: MethodSymbol if
+        m.paramss.isEmpty &&
+        m.typeParams.isEmpty &&
+        m.returnType <:< prefixType =>
+        val prefix = Select(container, m)
+        val name = c.Expr(Select(prefix, newTermName("prefixName")))
+        val iri = c.Expr(Select(prefix, newTermName("prefixIri")))
+        reify(name.splice -> iri.splice).tree
+    }.toList
+
+    c.Expr[Map[String, String]](
+      Apply(Select(reify(Map).tree, newTermName("apply")), prefixes)
+    )
+  }
+}
+
 private object PrefixMacros extends MacroUtils {
   lazy val parser = new SchemaParser[Sesame]
 
