@@ -22,8 +22,7 @@ object BananaUtils extends Build {
     dependencies = Seq(io),
     settings = commonSettings ++ Seq(
       libraryDependencies ++= Seq(
-        //"org.slf4j" % "slf4j-simple" % "1.6.4",
-        "com.github.jsonld-java" % "jsonld-java-jena" % "0.1" excludeAll(
+        "com.github.jsonld-java" % "jsonld-java-jena" % "0.2" excludeAll(
           ExclusionRule(organization = "org.apache.jena"),
           ExclusionRule(organization = "org.slf4j")
         )
@@ -43,6 +42,15 @@ object BananaUtils extends Build {
     )
   ).dependsOn(
     ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-sesame")
+  )
+
+  lazy val argonaut: Project = Project(
+    id = "banana-argonaut",
+    base = file("argonaut"),
+    dependencies = Seq(io),
+    settings = commonSettings ++ Seq(
+      libraryDependencies += "io.argonaut" %% "argonaut" % "6.0"
+    )
   )
 
   def commonSettings = Defaults.defaultSettings ++ Seq(
