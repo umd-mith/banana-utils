@@ -13,7 +13,7 @@ object BananaUtils extends Build {
     base = file("io"),
     settings = commonSettings
   ).dependsOn(
-    ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-rdf")
+    ProjectRef(uri("git://github.com/w3c/banana-rdf.git#259d7e17a9c7aa72dec9abe8c0bb61ea9e49e3bd"), "banana-rdf")
   )
 
   lazy val ioJena: Project = Project(
@@ -30,7 +30,7 @@ object BananaUtils extends Build {
       )
     )
   ).dependsOn(
-    ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-jena")
+    ProjectRef(uri("git://github.com/w3c/banana-rdf.git#259d7e17a9c7aa72dec9abe8c0bb61ea9e49e3bd"), "banana-jena")
   )
 
   lazy val prefixes: Project = Project(
@@ -42,7 +42,7 @@ object BananaUtils extends Build {
       )
     )
   ).dependsOn(
-    ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-sesame")
+    ProjectRef(uri("git://github.com/w3c/banana-rdf.git#259d7e17a9c7aa72dec9abe8c0bb61ea9e49e3bd"), "banana-sesame")
   )
 
   def commonSettings = Defaults.defaultSettings ++ Seq(
@@ -59,6 +59,9 @@ object BananaUtils extends Build {
       "-unchecked"
     ),
     libraryDependencies ++= Seq(
+      /*"org.w3" %% "banana-rdf" % "0.4",
+      "org.w3" %% "banana-jena" % "0.4",
+      "org.w3" %% "banana-sesame" % "0.4",*/
       "org.slf4j" % "slf4j-simple" % "1.6.4",
       "org.typelevel" %% "scalaz-contrib-210" % "0.1.4"
     )
