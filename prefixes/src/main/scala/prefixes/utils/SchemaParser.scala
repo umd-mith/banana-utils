@@ -1,11 +1,10 @@
 package edu.umd.mith.banana.prefixes.utils
 
+import java.io.InputStream
 import org.w3.banana._
 import org.w3.banana.diesel._
 import org.w3.banana.syntax._
 import scala.util.Try
-import scalax.io.InputResource
-import
   scalaz._,
   scalaz.std.list._,
   scalaz.syntax.apply._,
@@ -21,7 +20,7 @@ class SchemaParser[Rdf <: RDF](implicit
   import ops._
   import sparqlOps._
 
-  def parse[R](resource: InputResource[R])(
+  def parse(resource: InputStream)(
     name: String,
     iri: String
   ): Try[(List[String], List[String])] =

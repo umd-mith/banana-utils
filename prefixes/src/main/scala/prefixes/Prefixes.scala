@@ -8,7 +8,6 @@ import scala.language.experimental.macros
 import scala.language.higherKinds
 import scala.reflect.macros.Context
 import scala.util._
-import scalax.io.Resource
 
 trait Prefixes[Rdf <: RDF] {
   def ops: RDFOps[Rdf]
@@ -133,7 +132,7 @@ private object PrefixMacros extends MacroUtils {
 
     iriAndStream.foreach {
       case (iri, stream) =>
-        parser.parse(Resource.fromInputStream(stream))(name, iri) match {
+        parser.parse(stream)(name, iri) match {
           case Failure(error) =>
             c.abort(c.enclosingPosition, "Invalid schema: " + error)
           case Success((properties, classes)) =>

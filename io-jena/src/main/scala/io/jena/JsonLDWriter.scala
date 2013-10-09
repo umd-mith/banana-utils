@@ -5,11 +5,10 @@ import com.github.jsonldjava.utils.JSONUtils
 import com.github.jsonldjava.impl.JenaRDFParser
 import com.hp.hpl.jena.rdf.model.ModelFactory
 import edu.umd.mith.banana.io.{ JsonLD, JsonLDContext }
-import java.io.{ Writer => jWriter }
+import java.io.{ OutputStream, OutputStreamWriter }
 import org.w3.banana._
 import org.w3.banana.jena.Jena
 import scala.util._
-import scalax.io._
 
 abstract class JsonLDWriter[C: JsonLDContext]
   extends RDFWriter[Jena, JsonLD] {
@@ -19,17 +18,16 @@ abstract class JsonLDWriter[C: JsonLDContext]
 
   def contextMap = implicitly[JsonLDContext[C]].toMap(context)
 
-  def write[R <: jWriter](
+  def write(
     graph: Jena#Graph,
-    wcr: WriteCharsResource[R],
+    stream: OutputStream,
     base: String
   ): Try[Unit] = Try {
-    wcr.acquireAndGet { writer =>
-      val model = ModelFactory.createModelForGraph(graph.jenaGraph)
-      val parser = new JenaRDFParser()
-      val jsonld = JSONLD.compact(JSONLD.fromRDF(model, parser), contextMap)
-      JSONUtils.writePrettyPrint(writer, jsonld)
-    }
+    val model = ModelFactory.createModelForGraph(graph)
+    val parser = new JenaRDFParser()
+    val jsonld = JSONLD.compact(JSONLD.fromRDF(model, parser), contextMap)
+    val writer = new OutputStreamWriter(stream) 
+    JSONUtils.writePrettyPrint(writer, jsonld)
   }
 }
 
