@@ -45,6 +45,15 @@ object BananaUtils extends Build {
     ProjectRef(uri("git://github.com/w3c/banana-rdf.git#259d7e17a9c7aa72dec9abe8c0bb61ea9e49e3bd"), "banana-sesame")
   )
 
+  lazy val argonaut: Project = Project(
+    id = "banana-argonaut",
+    base = file("argonaut"),
+    dependencies = Seq(io),
+    settings = commonSettings ++ Seq(
+      libraryDependencies += "io.argonaut" %% "argonaut" % "6.0"
+    )
+  )
+
   def commonSettings = Defaults.defaultSettings ++ Seq(
     organization := "edu.umd.mith",
     version := "0.0.0-SNAPSHOT",
