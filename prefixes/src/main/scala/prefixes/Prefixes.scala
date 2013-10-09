@@ -331,7 +331,7 @@ private object PrefixMacros extends MacroUtils {
       )
     }
 
-    parser.parse(Resource.fromInputStream(stream))(name, iriLit) match {
+    parser.parse(stream)(name, iriLit) match {
       case Failure(error) =>
         c.abort(c.enclosingPosition, "Invalid schema: " + error)
       case Success((properties, classes)) =>
