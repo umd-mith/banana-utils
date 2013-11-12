@@ -6,7 +6,7 @@ object BananaUtils extends Build {
     id = "banana-utils",
     base = file("."),
     settings = commonSettings
-  ).aggregate(io, ioJena, prefixes)
+  ).aggregate(io, ioJena, sesameJena, prefixes)
 
   lazy val io: Project = Project(
     id = "banana-io",
@@ -30,6 +30,19 @@ object BananaUtils extends Build {
     )
   ).dependsOn(
     ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-jena")
+  )
+
+  lazy val sesameJena: Project = Project(
+    id = "banana-io-sesame",
+    base = file("io-sesame"),
+    dependencies = Seq(io),
+    settings = commonSettings ++ Seq(
+      libraryDependencies ++= Seq(
+        "org.openrdf.sesame" % "sesame-rio-rdfjson" % "2.7.7"
+      )
+    )
+  ).dependsOn(
+    ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-sesame")
   )
 
   lazy val prefixes: Project = Project(
