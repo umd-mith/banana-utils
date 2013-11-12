@@ -23,7 +23,7 @@ object BananaUtils extends Build {
     settings = commonSettings ++ Seq(
       libraryDependencies ++= Seq(
         //"org.slf4j" % "slf4j-simple" % "1.6.4",
-        "com.github.jsonld-java" % "jsonld-java-jena" % "0.1" excludeAll(
+        "com.github.jsonld-java" % "jsonld-java-jena" % "0.2" excludeAll(
           ExclusionRule(organization = "org.apache.jena"),
           ExclusionRule(organization = "org.slf4j")
         )
