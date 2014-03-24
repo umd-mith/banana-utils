@@ -154,27 +154,12 @@ object JenaOperations extends RDFOps[Jena] {
   // graph union
 
   def union(graphs: Seq[Jena#Graph]): Jena#Graph = {
-    graphs match {
-      case Seq() => emptyGraph
-      case Seq(graph) => graph
-      case _ =>
-        var triples: Set[Jena#Triple] = Set.empty
-        var prefixes: Map[String, String] = Map.empty
-        graphs.foreach {
-          case ImmutableJenaGraph(_triples, _prefixes) =>
-            triples ++= _triples
-            prefixes ++= _prefixes
-          case graph =>
-            val it = graph.find(JenaNode.ANY, JenaNode.ANY, JenaNode.ANY)
-            while (it.hasNext) { triples += it.next() }
-            val pmIt = graph.getPrefixMapping.getNsPrefixMap.entrySet.iterator()
-            while (pmIt.hasNext) {
-              val entry = pmIt.next()
-              prefixes += (entry.getKey -> entry.getValue)
-            }
-        }
-        ImmutableJenaGraph(triples, prefixes)
+    val g = Factory.createDefaultGraph
+    graphs.foreach { graph =>
+      val it = graph.find(JenaNode.ANY, JenaNode.ANY, JenaNode.ANY)
+      while (it.hasNext) { g.add(it.next()) }
     }
+    g
   }
 
   def diff(g1: Jena#Graph, g2: Jena#Graph): Jena#Graph = {
