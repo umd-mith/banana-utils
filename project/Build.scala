@@ -16,6 +16,15 @@ object BananaUtils extends Build {
     ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-rdf")
   )
 
+  lazy val jena: Project = Project(
+    id = "banana-jena",
+    base = file("jena"),
+    dependencies = Seq(io),
+    settings = commonSettings
+  ).dependsOn(
+    ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-jena")
+  )
+
   lazy val ioJena: Project = Project(
     id = "banana-io-jena",
     base = file("io-jena"),
