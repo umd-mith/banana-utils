@@ -13,7 +13,7 @@ object BananaUtils extends Build {
     base = file("io"),
     settings = commonSettings
   ).dependsOn(
-    ProjectRef(uri("git://github.com/w3c/banana-rdf.git#259d7e17a9c7aa72dec9abe8c0bb61ea9e49e3bd"), "banana-rdf")
+    ProjectRef(uri("git://github.com/w3c/banana-rdf.git#e641b8a5fccc5e8efa9a74c2a420462ee826f8ea"), "banana-rdf")
   )
 
   lazy val ioJena: Project = Project(
@@ -30,7 +30,7 @@ object BananaUtils extends Build {
       )
     )
   ).dependsOn(
-    ProjectRef(uri("git://github.com/w3c/banana-rdf.git#259d7e17a9c7aa72dec9abe8c0bb61ea9e49e3bd"), "banana-jena")
+    ProjectRef(uri("git://github.com/w3c/banana-rdf.git#e641b8a5fccc5e8efa9a74c2a420462ee826f8ea"), "banana-jena")
   )
 
   lazy val prefixes: Project = Project(
@@ -42,7 +42,7 @@ object BananaUtils extends Build {
       )
     )
   ).dependsOn(
-    ProjectRef(uri("git://github.com/w3c/banana-rdf.git#259d7e17a9c7aa72dec9abe8c0bb61ea9e49e3bd"), "banana-sesame")
+    ProjectRef(uri("git://github.com/w3c/banana-rdf.git#e641b8a5fccc5e8efa9a74c2a420462ee826f8ea"), "banana-sesame")
   )
 
   lazy val argonaut: Project = Project(

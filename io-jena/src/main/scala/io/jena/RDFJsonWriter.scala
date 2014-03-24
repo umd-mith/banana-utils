@@ -6,7 +6,7 @@ import com.github.jsonldjava.impl.JenaRDFParser
 import com.hp.hpl.jena.rdf.model.ModelFactory
 import edu.umd.mith.banana.io.RDFJson
 import java.io.{ Writer => jWriter }
-import org.openjena.riot.system.JenaWriterRdfJson
+//import org.openjena.riot.system.JenaWriterRdfJson
 import org.w3.banana._
 import org.w3.banana.jena.Jena
 import scala.util._
@@ -22,7 +22,7 @@ trait RDFJsonWriter extends RDFWriter[Jena, RDFJson] {
   ): Try[Unit] = Try {
     wcr.acquireAndGet { writer =>
       val model = ModelFactory.createModelForGraph(graph.jenaGraph)
-      new JenaWriterRdfJson().write(model, writer, null)
+      model.write(writer, "RDF/JSON", null)
     }
   }
 }
