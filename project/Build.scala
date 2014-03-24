@@ -28,9 +28,9 @@ object BananaUtils extends Build {
         )
       )
     )
-  ).dependsOn(
+  )/*.dependsOn(
     ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-jena")
-  )
+  )*/
 
   lazy val sesameJena: Project = Project(
     id = "banana-io-sesame",
@@ -41,9 +41,9 @@ object BananaUtils extends Build {
         "org.openrdf.sesame" % "sesame-rio-rdfjson" % "2.7.7"
       )
     )
-  ).dependsOn(
+  )/*.dependsOn(
     ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-sesame")
-  )
+  )*/
 
   lazy val prefixes: Project = Project(
     id = "banana-prefixes",
@@ -53,9 +53,9 @@ object BananaUtils extends Build {
         "org.scala-lang" % "scala-compiler" % _
       )
     )
-  ).dependsOn(
+  )/*.dependsOn(
     ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-sesame")
-  )
+  )*/
 
   lazy val argonaut: Project = Project(
     id = "banana-argonaut",
@@ -80,9 +80,9 @@ object BananaUtils extends Build {
       "-unchecked"
     ),
     libraryDependencies ++= Seq(
-      /*"org.w3" %% "banana-rdf" % "0.4",
+      "org.w3" %% "banana-rdf" % "0.4",
       "org.w3" %% "banana-jena" % "0.4",
-      "org.w3" %% "banana-sesame" % "0.4",*/
+      "org.w3" %% "banana-sesame" % "0.4",
       "org.slf4j" % "slf4j-simple" % "1.6.4",
       "org.typelevel" %% "scalaz-contrib-210" % "0.1.4"
     )
