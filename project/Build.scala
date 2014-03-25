@@ -78,9 +78,8 @@ object BananaUtils extends Build {
   def commonSettings = Defaults.defaultSettings ++ Seq(
     organization := "edu.umd.mith",
     version := "0.0.0-SNAPSHOT",
-    resolvers += "Sonatype snapshots" at
-      "http://oss.sonatype.org/content/repositories/snapshots",
-    scalaVersion := "2.10.2",
+    resolvers += Resolver.sonatypeRepo("snapshots"),
+    scalaVersion := "2.10.3",
     scalaBinaryVersion := "2.10",
     scalacOptions := Seq(
       "-feature",
@@ -89,11 +88,8 @@ object BananaUtils extends Build {
       "-unchecked"
     ),
     libraryDependencies ++= Seq(
-      /*"org.w3" %% "banana-rdf" % "0.4",
-      "org.w3" %% "banana-jena" % "0.4",
-      "org.w3" %% "banana-sesame" % "0.4",*/
-      "org.slf4j" % "slf4j-simple" % "1.6.4",
-      "org.typelevel" %% "scalaz-contrib-210" % "0.1.4"
+      "org.slf4j" % "slf4j-simple" % "1.7.6",
+      "org.typelevel" %% "scalaz-contrib-210" % "0.1.5"
     )
   )
 }
