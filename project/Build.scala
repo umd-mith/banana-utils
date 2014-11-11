@@ -12,8 +12,6 @@ object BananaUtils extends Build {
     id = "banana-io",
     base = file("io"),
     settings = commonSettings
-  ).dependsOn(
-    ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-rdf")
   )
 
   lazy val jena: Project = Project(
