@@ -19,8 +19,6 @@ object BananaUtils extends Build {
     base = file("jena"),
     dependencies = Seq(io),
     settings = commonSettings
-  ).dependsOn(
-    ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-jena")
   )
 
   lazy val ioJena: Project = Project(
@@ -35,8 +33,6 @@ object BananaUtils extends Build {
         )
       )
     )
-  ).dependsOn(
-    ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-jena")
   )
 
   lazy val sesameJena: Project = Project(
@@ -48,8 +44,6 @@ object BananaUtils extends Build {
         "org.openrdf.sesame" % "sesame-rio-rdfjson" % "2.7.7"
       )
     )
-  ).dependsOn(
-    ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-sesame")
   )
 
   lazy val prefixes: Project = Project(
@@ -60,8 +54,6 @@ object BananaUtils extends Build {
         "org.scala-lang" % "scala-compiler" % _
       )
     )
-  ).dependsOn(
-    ProjectRef(uri("git://github.com/w3c/banana-rdf.git"), "banana-sesame")
   )
 
   lazy val argonaut: Project = Project(
